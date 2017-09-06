@@ -1,6 +1,6 @@
 function setMenu(){
 	$("#menu").find("a[role=button]").click(function(){
-		$("#menuPrincipal").removeClass("show").prop("aria-expanded", "true");
+		$("#menuPrincipal").removeClass("in").prop("aria-expanded", "true");
 	});
 	
 	$("#menu").find("#btnOrdenes").click(function(){

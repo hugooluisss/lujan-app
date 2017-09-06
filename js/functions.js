@@ -1,6 +1,6 @@
-server = "http://app.syncro.cl/";
 server = "http://localhost/lujan-web/";
-var idTransportista = undefined;
+server = "http://192.168.2.4/lujan-web/";
+var idUsuario = undefined;
 /*
 *
 * Centra verticalmente una ventana modal

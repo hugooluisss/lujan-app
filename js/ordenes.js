@@ -1,4 +1,5 @@
 var tplOrden = null;
+var tplMercancia = null;
 function panelOrdenes(){
 	$("#dvTitulo").html("Ordenes");
 	
@@ -84,40 +85,131 @@ function panelOrdenes(){
 		    	"json": true,
 		    	"movil": 1
 		    }, function(mercancias){
-		    	$("#listaMercancia").find("tbody").html("");
+		    	$("#tabMercancia").find(".lista").html("");
 		    	
-		    	if (mercancias.lenght > 0){
-			    	$.each(mercancias, function(){
-			    		var mercancia = $(this);
-			    		
-			    		var tr = $("<tr />");
-			    		var fraccion = $("<td />", {
-			    			text: mercancia.fraccion
-			    		});
-			    		var descripcion = $("<td />", {
-			    			text: mercancia.descripcion
-			    		});
-			    		
-			    		tr.append(fraccion).append(descripcion);
-			    		$("#listaMercancia tbody").append(tr);
-			    	});
-			    }else{
-				    var tr = $("<tr />");
-			    		var descripcion = $("<td />", {
-			    			text: "Sin mercancia agregada"
-			    		});
-			    		
-			    		tr.append(descripcion);
-			    		$("#listaMercancia tbody").append(tr);
-			    }
-			    	
+		    	$.each(mercancias, function(i, mercancia){
+		    		var plantilla = tplMercancia.clone();
+		    		$.each(mercancia, function(key, valor){
+		    			plantilla.find("[campo="+ key +"]").val(valor);
+		    			plantilla.find("[campo="+ key +"]").html(valor);
+		    		});
+		    		
+		    		plantilla.find("[accion=modificar]").attr("datos", mercancia.json).click(function(){
+		    			$.each(mercancia, function(key, valor){
+		    				$("#frmMercancia").find("[campo="+ key +"]").val(valor);
+		    				
+		    				$("#winAddMercancia").modal();
+		    			});
+		    		});
+		    		
+		    		plantilla.find("[accion=eliminar]").attr("identificador", mercancia.idMercancia).click(function(){
+		    			alertify.confirm("¿Seguro?", function (e) {
+			    			if (e) {
+				    			var obj = new TOrden;
+				    			obj.eliminarMercancia({
+				    				id: mercancia.idMercancia,
+				    				fn: {
+					    				before: function(){
+						    				jsShowWindowLoad("Se está procesando la eliminación de la mercancía");
+					    				}, after: function(resp){
+						    				jsRemoveWindowLoad();
+						    				if (resp.band){
+						    					alertify.success("Mercancía eliminada");
+						    					getMercancia();
+						    				}
+					    				}
+				    				}
+				    			});
+				    		} else { alertify.error("Has pulsado '" + alertify.labels.cancel + "'");
+					    	}
+					    });
+		    		});
+		    		
+		    		plantilla.find("[accion=fotografias]").attr("identificador", mercancia.idMercancia).click(function(){
+		    			$("#winFotografias").modal();
+		    		});
+		    		
+		    		$("#tabMercancia").find(".lista").append(plantilla);
+		    	});			    	
 		    }, "json");
 	    }
+	    
+	    
+	    $("#frmMercancia").validate({
+			debug: true,
+			rules: {
+				//txtCodigo: "required",
+				txtFraccion: "required",
+				txtDescripcion: "required",
+				txtMarca: "required",
+				txtModelo: "required",
+				txtSerie: "required",
+				txtCantidad: {
+					required: true,
+					number: true
+				},
+				txtPesoNeto: {
+					required: true,
+					number: true
+				},
+				txtPesoBruto: {
+					required: true,
+					number: true
+				},
+				txtCantidad: {
+					required: true,
+					number: true
+				}
+			},
+			wrapper: 'span', 
+			submitHandler: function(form){
+				var obj = new TOrden;
+				obj.addMercancia({
+					"id": $("#idMercancia").val(),
+					"orden": $("#id").val(),
+					"fraccion": $("#txtFraccion").val(), 
+					"descripcion": $("#txtDescripcion").val(), 
+					"marca": $("#txtMarca").val(), 
+					"modelo": $("#txtModelo").val(),
+					"serie": $("#txtSerie").val(),
+					"cantidad": $("#txtCantidad").val(),
+					"pesoneto": $("#txtPesoNeto").val(),
+					"pesobruto": $("#txtPesoBruto").val(),
+					"embalaje": $("#txtEmbalaje").val(),
+					"mctm": $("#txtMCTM").val(),
+					"ec": $("#txtEC").val(),
+					"observaciones": $("#txtObservaciones").val(),
+					fn: {
+						before: function(){
+							jsShowWindowLoad("Se está agregando la mercancía");
+						},
+						after: function(datos){
+							jsRemoveWindowLoad();
+							if (datos.band){
+								getMercancia();
+								$("#winAddMercancia").modal("hide");
+								alertify.success("Agregado");
+							}else{
+								alertify.error("No se pudo guardar");
+							}
+						}
+					}
+				});
+			}
+		});
+		
+		$('#winAddMercancia').on('hidden.bs.modal', function(){
+			$("#frmMercancia")[0].reset();
+		});
 	});
 }
 
 $(document).ready(function(){
 	$.get("vistas/orden.tpl", function(resp){
 		tplOrden = $(resp);
+	});
+	
+	$.get("vistas/mercancia.tpl", function(resp){
+		tplMercancia = $(resp);
 	});
 });
