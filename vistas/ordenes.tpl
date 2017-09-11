@@ -228,6 +228,12 @@
 				<h5 class="modal-title" id="exampleModalLabel">Fotografías</h5>
 			</div>
 			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<button id="btnCamara" class="btn btn-primary" title="Cámara"><i class="fa fa-camera" aria-hidden="true"></i></button>
+						<button id="btnGaleria" class="btn btn-primary" title="Galería"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

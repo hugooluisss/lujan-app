@@ -201,6 +201,53 @@ function panelOrdenes(){
 		$('#winAddMercancia').on('hidden.bs.modal', function(){
 			$("#frmMercancia")[0].reset();
 		});
+		
+		$("#btnCamara").click(function(){
+			if (navigator.camera != undefined){
+				navigator.camera.getPicture(function(imageData) {
+						$("#fotoPerfil").attr("src", "data:image/jpeg;base64," + imageData);
+						
+						//img.attr("src", "data:image/jpeg;base64," + imageURI);
+						//img.attr("src2", imageURI);
+						subirFotoPerfil(imageData);
+					}, function(message){
+						alertify.error("Ocurrio un error al subir la imagen");
+				        setTimeout(function() {
+				        	$("#mensajes").fadeOut(1500).removeClass("alert-danger");
+				        }, 5000);
+					}, { 
+						quality: 100,
+						//destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
+						encodingType: Camera.EncodingType.JPEG,
+						targetWidth: 250,
+						targetHeight: 250,
+						correctOrientation: true,
+						allowEdit: true
+					});
+			}else{
+				alertify.error("No se pudo iniciar la cámara");
+				console.log("No se pudo inicializar la cámara");
+			}
+		});
+		
+		
+		function subirFotoPerfil(imageURI){
+			jsShowWindowLoad("Estamos subiendo la fotografía");
+			$.post(server + 'cmercancia', {
+					"imagen": imageURI,
+					"movil": 1,
+					"identificador": $("#idMercancia").val(),
+					"action": "uploadImagenPerfil"
+				}, function(data){
+					jsRemoveWindowLoad();
+					
+					if (data.band)
+						alertify.success("La fotografía se cargó con éxito");
+					else
+						alertify.error("Ocurrió un error al subir la fotografía");
+				}, "json");
+		}
 	});
 }
 
