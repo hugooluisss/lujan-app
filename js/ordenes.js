@@ -295,6 +295,7 @@ function panelOrdenes(){
     				var panelFooter = $("<div />", {class: "panel-footer text-right"});
     				var img = $("<img />", {class: "img-responsive", src: server + imagen.src});
     				var eliminar = $("<button />", {class: "btn btn-xs btn-danger", html: '<i class="fa fa-trash" aria-hidden="true"></i>'});
+    				
     				eliminar.click(function(){
 	    				alertify.confirm("¿Seguro?", function (e) {
 			    			if (e) {
@@ -315,11 +316,11 @@ function panelOrdenes(){
 					    });
     				});
     				
-    				var descargar = $("<a />", {class: "btn btn-xs btn-success", html: '<i class="fa fa-download" aria-hidden="true"></i>', href: server + imagen.src, download: imagen.nombre});
+    				//var descargar = $("<a />", {class: "btn btn-xs btn-success", html: '<i class="fa fa-download" aria-hidden="true"></i>', href: server + imagen.src, download: imagen.nombre});
     				
     				panel.append(panelBody).append(panelFooter);
     				panelBody.append(img).append(imagen.nombre);
-    				panelFooter.append(descargar).append(eliminar);
+    				panelFooter.append(eliminar);
     				
 	    			$("#winFotografias").find(".listaImagenes").append(panel);
     			});
