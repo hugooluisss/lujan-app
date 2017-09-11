@@ -126,6 +126,7 @@ function panelOrdenes(){
 		    		});
 		    		
 		    		plantilla.find("[accion=fotografias]").attr("identificador", mercancia.idMercancia).click(function(){
+		    			$("#winFotografias").attr("mercancia", mercancia.idMercancia);
 		    			$("#winFotografias").modal();
 		    		});
 		    		
@@ -237,7 +238,7 @@ function panelOrdenes(){
 			$.post(server + 'cmercancias', {
 					"imagen": imageURI,
 					"movil": 1,
-					"identificador": $("#idMercancia").val(),
+					"identificador": $("#winFotografias").attr("mercancia"),
 					"action": "uploadImagen"
 				}, function(data){
 					jsRemoveWindowLoad();
