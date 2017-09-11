@@ -234,7 +234,7 @@ function panelOrdenes(){
 		
 		function subirFotoPerfil(imageURI){
 			jsShowWindowLoad("Estamos subiendo la fotografía");
-			$.post(server + 'cmercancia', {
+			$.post(server + 'cmercancias', {
 					"imagen": imageURI,
 					"movil": 1,
 					"identificador": $("#idMercancia").val(),
