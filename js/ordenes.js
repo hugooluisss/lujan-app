@@ -244,7 +244,7 @@ function panelOrdenes(){
 				        }, 5000);
 					}, { 
 						quality: 100,
-						sourceType: pictureSource.PHOTOLIBRARY,
+						sourceType: navigator.camera.PictureSourceType.pictureSource.PHOTOLIBRARY,
 						destinationType: Camera.DestinationType.DATA_URL,
 						encodingType: Camera.EncodingType.JPEG,
 						targetWidth: 250,
@@ -278,56 +278,55 @@ function panelOrdenes(){
 		$('#winFotografias').on('shown.bs.modal', function(){
 			$("#winFotografias").find(".listaImagenes").html("");
 			listarFotos();
-			
-			function listarFotos(){
-				jsShowWindowLoad("Obteniendo lista de fotografías");
-				$.post(server + "cmercancias", {
-					"identificador": $("#winFotografias").attr("mercancia"),
-					"action": "getFotografias",
-    				"movil": 1,
-    				"json": true
-				}, function(imagenes){
-					jsRemoveWindowLoad();
-					$.each(imagenes, function(i, imagen){
-	    				var panel = $("<div />", {class: "panel"});
-	    				var panelBody = $("<div />", {class: "panel-body text-center"});
-	    				var panelFooter = $("<div />", {class: "panel-footer text-right"});
-	    				var img = $("<img />", {class: "img-responsive", src: server + imagen.src});
-	    				var eliminar = $("<button />", {class: "btn btn-xs btn-danger", html: '<i class="fa fa-trash" aria-hidden="true"></i>'});
-	    				eliminar.click(function(){
-		    				alertify.confirm("¿Seguro?", function (e) {
-				    			if (e) {
-				    				jsShowWindowLoad("Se está eliminado la fotografía del servidor");
-					    			$.post(server + "cmercancias", {
-					    				"action": "eliminarFoto",
-					    				"archivo": imagen.src,
-					    				"movil": 1,
-					    				"json": true
-					    			}, function(resp){
-					    				jsRemoveWindowLoad();
-					    				if (resp.band)
-					    					listarFotos();
-					    				else
-					    					alertify.error("No se pudo eliminar");
-					    			}, "json");
-					    		}
-						    });
-	    				});
-	    				
-	    				var descargar = $("<a />", {class: "btn btn-xs btn-success", html: '<i class="fa fa-download" aria-hidden="true"></i>', href: server + imagen.src, download: imagen.nombre});
-	    				
-	    				panel.append(panelBody).append(panelFooter);
-	    				panelBody.append(img).append(imagen.nombre);
-	    				panelFooter.append(descargar).append(eliminar);
-	    				
-		    			$("#winFotografias").find(".listaImagenes").append(panel);
-	    			});
-					
-				}, "json");
-				
-    		}
-
 		});
+		
+		function listarFotos(){
+			jsShowWindowLoad("Obteniendo lista de fotografías");
+			$.post(server + "cmercancias", {
+				"identificador": $("#winFotografias").attr("mercancia"),
+				"action": "getFotografias",
+				"movil": 1,
+				"json": true
+			}, function(imagenes){
+				jsRemoveWindowLoad();
+				$.each(imagenes, function(i, imagen){
+    				var panel = $("<div />", {class: "panel"});
+    				var panelBody = $("<div />", {class: "panel-body text-center"});
+    				var panelFooter = $("<div />", {class: "panel-footer text-right"});
+    				var img = $("<img />", {class: "img-responsive", src: server + imagen.src});
+    				var eliminar = $("<button />", {class: "btn btn-xs btn-danger", html: '<i class="fa fa-trash" aria-hidden="true"></i>'});
+    				eliminar.click(function(){
+	    				alertify.confirm("¿Seguro?", function (e) {
+			    			if (e) {
+			    				jsShowWindowLoad("Se está eliminado la fotografía del servidor");
+				    			$.post(server + "cmercancias", {
+				    				"action": "eliminarFoto",
+				    				"archivo": imagen.src,
+				    				"movil": 1,
+				    				"json": true
+				    			}, function(resp){
+				    				jsRemoveWindowLoad();
+				    				if (resp.band)
+				    					listarFotos();
+				    				else
+				    					alertify.error("No se pudo eliminar");
+				    			}, "json");
+				    		}
+					    });
+    				});
+    				
+    				var descargar = $("<a />", {class: "btn btn-xs btn-success", html: '<i class="fa fa-download" aria-hidden="true"></i>', href: server + imagen.src, download: imagen.nombre});
+    				
+    				panel.append(panelBody).append(panelFooter);
+    				panelBody.append(img).append(imagen.nombre);
+    				panelFooter.append(descargar).append(eliminar);
+    				
+	    			$("#winFotografias").find(".listaImagenes").append(panel);
+    			});
+				
+			}, "json");
+			
+		}
 	});
 }
 
