@@ -229,11 +229,14 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-xs-12">
-						<button id="btnCamara" class="btn btn-primary" title="Cámara"><i class="fa fa-camera" aria-hidden="true"></i></button>
-						<button id="btnGaleria" class="btn btn-primary" title="Galería"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+					<div class="col-xs-12 listaImagenes">
+						
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="btnCamara" class="btn btn-primary" title="Cámara"><i class="fa fa-camera" aria-hidden="true"></i> Cámara</button>
+				<button id="btnGaleria" class="btn btn-primary" title="Galería"><i class="fa fa-picture-o" aria-hidden="true"></i> Álbum</button>
 			</div>
 		</div>
 	</div>

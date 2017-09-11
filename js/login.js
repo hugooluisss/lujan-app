@@ -66,10 +66,10 @@ var app = {
 		});
 		*/
 		jsShowWindowLoad();
-		//idTransportista = window.localStorage.getItem("sesion");
+		var idUsuario = window.localStorage.getItem("sesion");
 		
-		//if (idTransportista != null && idTransportista != undefined && idTransportista != '')
-		//	location.href = "inicio.html";
+		if (idUsuario != null && idUsuario != undefined && idUsuario != '')
+			location.href = "inicio.html";
 		
 		jsRemoveWindowLoad();
 	}
