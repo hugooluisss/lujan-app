@@ -222,8 +222,8 @@ function panelOrdenes(){
 						encodingType: Camera.EncodingType.JPEG,
 						targetWidth: 250,
 						targetHeight: 250,
-						correctOrientation: true,
-						allowEdit: true
+						correctOrientation: true
+						//allowEdit: true
 					});
 			}else{
 				alertify.error("No se pudo iniciar la cámara");
@@ -238,7 +238,7 @@ function panelOrdenes(){
 					"imagen": imageURI,
 					"movil": 1,
 					"identificador": $("#idMercancia").val(),
-					"action": "uploadImagenPerfil"
+					"action": "uploadImagen"
 				}, function(data){
 					jsRemoveWindowLoad();
 					
