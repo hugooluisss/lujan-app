@@ -209,13 +209,9 @@ function panelOrdenes(){
 		$("#btnCamara").click(function(){
 			if (navigator.camera != undefined){
 				navigator.camera.getPicture(function(imageData) {
-						$("#fotoPerfil").attr("src", "data:image/jpeg;base64," + imageData);
-						subirFotoPerfil(imageData);
+						subirFoto(imageData);
 					}, function(message){
 						alertify.error("Ocurrio un error al subir la imagen");
-				        setTimeout(function() {
-				        	$("#mensajes").fadeOut(1500).removeClass("alert-danger");
-				        }, 5000);
 					}, { 
 						quality: 100,
 						//destinationType: Camera.DestinationType.FILE_URI,
@@ -235,16 +231,12 @@ function panelOrdenes(){
 		$("#btnGaleria").click(function(){
 			if (navigator.camera != undefined){
 				navigator.camera.getPicture(function(imageData) {
-						$("#fotoPerfil").attr("src", "data:image/jpeg;base64," + imageData);
-						subirFotoPerfil(imageData);
+						subirFoto(imageData);
 					}, function(message){
 						alertify.error("Ocurrio un error al subir la imagen");
-				        setTimeout(function() {
-				        	$("#mensajes").fadeOut(1500).removeClass("alert-danger");
-				        }, 5000);
 					}, { 
 						quality: 100,
-						sourceType: navigator.camera.PictureSourceType.pictureSource.PHOTOLIBRARY,
+						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						destinationType: Camera.DestinationType.DATA_URL,
 						encodingType: Camera.EncodingType.JPEG,
 						targetWidth: 250,
@@ -320,7 +312,7 @@ function panelOrdenes(){
     				//var descargar = $("<a />", {class: "btn btn-xs btn-success", html: '<i class="fa fa-download" aria-hidden="true"></i>', href: server + imagen.src, download: imagen.nombre});
     				
     				panel.append(panelBody).append(panelFooter);
-    				panelBody.append(img).append(imagen.nombre);
+    				panelBody.append(img).append('<br />').append(imagen.nombre);
     				panelFooter.append(eliminar);
     				
 	    			$("#winFotografias").find(".listaImagenes").append(panel);
