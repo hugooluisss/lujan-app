@@ -49,6 +49,8 @@ TOrden = function(){
 				"mctm": datos.mctm,
 				"ec": datos.ec,
 				"observaciones": datos.observaciones,
+				"origen": datos.origen,
+				"destino": datos.destino,
 				"action": "add",
 				"movil": 1
 			}, function(data){

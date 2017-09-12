@@ -1,6 +1,6 @@
 server = "http://localhost/lujan-web/";
 server = "http://192.168.2.4/lujan-web/";
-server = "http://10.0.0.5/lujan-web/";
+//server = "http://10.0.0.5/lujan-web/";
 var idUsuario = undefined;
 /*
 *

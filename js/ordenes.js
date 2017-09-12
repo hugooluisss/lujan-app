@@ -6,6 +6,11 @@ function panelOrdenes(){
 	$.get("vistas/ordenes.tpl", function(pOrdenes){
 		$("#modulo").html(pOrdenes);
 		
+		$.each(paises, function(i, pais){
+			$("#selOrigen").append($("<option />", {value: pais.idPais, text: pais.iso + " - " + pais.nombre}));
+			$("#selDestino").append($("<option />", {value: pais.idPais, text: pais.iso + " - " + pais.nombre}));
+		});
+		
 		jsShowWindowLoad("Estamos obteniendo tus ordenes asignadas");
 		$.post(server + "listaOrdenesAgente", {
 			"movil": 1,
@@ -183,6 +188,8 @@ function panelOrdenes(){
 					"mctm": $("#txtMCTM").val(),
 					"ec": $("#txtEC").val(),
 					"observaciones": $("#txtObservaciones").val(),
+					"origen": $("#selOrigen").val(),
+					"destino": $("#selDestino").val(),
 					fn: {
 						before: function(){
 							jsShowWindowLoad("Se está agregando la mercancía");

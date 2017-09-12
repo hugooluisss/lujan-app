@@ -18,6 +18,7 @@
  */
 var db = null;
 var idUsuario = undefined;
+var paises = undefined;
 
 var app = {
 	// Application Constructor
@@ -100,6 +101,15 @@ var app = {
 		//window.plugins.PushbotsPlugin.toggleNotifications(false);
 		window.plugins.PushbotsPlugin.setTags(["transportista_" + idTransportista]);
 		*/
+		
+		$.post(server + "cordenes", {
+			"action": "getPaises",
+			"json": true,
+			"movil": 1
+		}, function(resp){
+			paises = resp;
+			console.log(resp);
+		}, "json");
 	}
 };
 

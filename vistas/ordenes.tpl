@@ -141,6 +141,20 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="selOrigen" class="control-label col-xs-4">Origen</label>
+						<div class="col-xs-8">
+							<select id="selOrigen" name="selOrigen" class="form-control" campo="idOrigen">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="selDestino" class="control-label col-xs-4">Destino</label>
+						<div class="col-xs-8">
+							<select id="selDestino" name="selDestino" class="form-control" campo="idDestino">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="txtMarca" class="control-label col-xs-4">Marca</label>
 						<div class="col-xs-8">
 							<input class="form-control input-xs" id="txtMarca" name="txtMarca" campo="marca">
