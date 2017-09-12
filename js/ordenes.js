@@ -268,9 +268,10 @@ function panelOrdenes(){
 				}, function(data){
 					jsRemoveWindowLoad();
 					
-					if (data.band)
+					if (data.band){
 						alertify.success("La fotografía se cargó con éxito");
-					else
+						listarFotos();
+					}else
 						alertify.error("Ocurrió un error al subir la fotografía");
 				}, "json");
 		}
