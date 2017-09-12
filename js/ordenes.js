@@ -250,7 +250,7 @@ function panelOrdenes(){
 		});
 		
 		
-		function subirFotoPerfil(imageURI){
+		function subirFoto(imageURI){
 			jsShowWindowLoad("Estamos subiendo la fotografía");
 			$.post(server + 'cmercancias', {
 					"imagen": imageURI,
