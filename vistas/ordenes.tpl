@@ -9,9 +9,6 @@
 		<li>
 			<a data-toggle="tab" href="#tabMercancia">Mercancia</a>
 		</li>
-		<li>
-			<a data-toggle="tab" href="#acciones">Acciones</a>
-		</li>
 	</ul>
 	
 	<div class="tab-content">
@@ -117,7 +114,6 @@
 			<div class="lista">
 			</div>
 		</div>
-		<div class="tab-pane" id="acciones" role="tabpanel">...3</div>
 	</div>
 </div>
 

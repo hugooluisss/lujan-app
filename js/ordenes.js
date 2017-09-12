@@ -217,8 +217,8 @@ function panelOrdenes(){
 						//destinationType: Camera.DestinationType.FILE_URI,
 						destinationType: Camera.DestinationType.DATA_URL,
 						encodingType: Camera.EncodingType.JPEG,
-						targetWidth: 250,
-						targetHeight: 250,
+						targetWidth: 500,
+						targetHeight: 500,
 						correctOrientation: true
 						//allowEdit: true
 					});
@@ -239,8 +239,8 @@ function panelOrdenes(){
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						destinationType: Camera.DestinationType.DATA_URL,
 						encodingType: Camera.EncodingType.JPEG,
-						targetWidth: 250,
-						targetHeight: 250,
+						targetWidth: 500,
+						targetHeight: 500,
 						correctOrientation: true
 					});
 			}else{
