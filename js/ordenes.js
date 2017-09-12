@@ -282,6 +282,7 @@ function panelOrdenes(){
 				"json": true
 			}, function(imagenes){
 				jsRemoveWindowLoad();
+				$("#winFotografias").find(".listaImagenes").html("");
 				$.each(imagenes, function(i, imagen){
     				var panel = $("<div />", {class: "panel"});
     				var panelBody = $("<div />", {class: "panel-body text-center"});
@@ -290,6 +291,7 @@ function panelOrdenes(){
     				var eliminar = $("<button />", {class: "btn btn-xs btn-danger", html: '<i class="fa fa-trash" aria-hidden="true"></i>'});
     				
     				eliminar.click(function(){
+    					var foto = $(this);
 	    				alertify.confirm("¿Seguro?", function (e) {
 			    			if (e) {
 			    				jsShowWindowLoad("Se está eliminado la fotografía del servidor");
@@ -300,9 +302,10 @@ function panelOrdenes(){
 				    				"json": true
 				    			}, function(resp){
 				    				jsRemoveWindowLoad();
-				    				if (resp.band)
+				    				if (resp.band){
+				    					foto.remove();
 				    					listarFotos();
-				    				else
+				    				}else
 				    					alertify.error("No se pudo eliminar");
 				    			}, "json");
 				    		}
