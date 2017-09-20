@@ -53,6 +53,7 @@ function panelOrdenes(){
 							//$("#btnDescargarFactura").prop("href", server + orden.archivo);
 							$("#btnDescargarFactura").prop("href", "#");
 							$("#btnDescargarFactura").click(function(){
+								window.open = cordova.InAppBrowser.open;
 								window.open(server + orden.archivo, '_system');
 							});
 						}						
