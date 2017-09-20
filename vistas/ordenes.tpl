@@ -120,7 +120,7 @@
 		</div>
 		<div class="tab-pane" id="tabAcciones" role="tabpanel">
 			<div class="container">
-				<a href="" class="btn btn-primary btn-block" id="btnDescargarFactura" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Factura</a>
+				<button class="btn btn-primary btn-block" id="btnDescargarFactura"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Factura</button>
 				<br />
 				<br />
 				<button id="setRevisada" name="setRevisada" class="btn btn-danger btn-block"> Establecer como Revisada</button>
