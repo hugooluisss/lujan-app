@@ -50,7 +50,11 @@ function panelOrdenes(){
 							$("#btnDescargarFactura").hide();
 						else{
 							$("#btnDescargarFactura").show();
-							$("#btnDescargarFactura").prop("href", server + orden.archivo);
+							//$("#btnDescargarFactura").prop("href", server + orden.archivo);
+							$("#btnDescargarFactura").prop("href", "#");
+							$("#btnDescargarFactura").click(function(){
+								window.open(server + orden.archivo, '_system');
+							});
 						}						
 						
 						getMercancia();
