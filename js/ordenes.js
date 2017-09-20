@@ -8,7 +8,6 @@ function panelOrdenes(){
 		
 		$.each(paises, function(i, pais){
 			$("#selOrigen").append($("<option />", {value: pais.idPais, text: pais.iso + " - " + pais.nombre}));
-			$("#selDestino").append($("<option />", {value: pais.idPais, text: pais.iso + " - " + pais.nombre}));
 		});
 		
 		jsShowWindowLoad("Estamos obteniendo tus ordenes asignadas");
@@ -17,6 +16,9 @@ function panelOrdenes(){
 			"usuario": idUsuario
 		}, function(ordenes){
 			jsRemoveWindowLoad();
+			if (ordenes.length == 0)
+				alertify.success("No tienes ordenes de trabajo pendientes por revisar");
+			
 			$.each(ordenes, function(){
 				var orden = this;
 				var plantilla = tplOrden.clone();
@@ -44,6 +46,13 @@ function panelOrdenes(){
 								el.text(valor);
 						});
 						
+						if (orden.archivo == "")
+							$("#btnDescargarFactura").hide();
+						else{
+							$("#btnDescargarFactura").show();
+							$("#btnDescargarFactura").prop("href", server + orden.archivo);
+						}						
+						
 						getMercancia();
 					});
 				});
@@ -51,6 +60,35 @@ function panelOrdenes(){
 				$("#accOrdenes").append(plantilla);
 			});
 		}, "json");
+		
+		$("#setRevisada").click(function(){
+			alertify.confirm("Estás indicando que terminaste la revisión ¿Seguro?", function(e){
+	   			if (e){
+	   				var obj = new TOrden;
+	   				obj.add({
+		   				id: $("#id").val(), 
+						estado: 3,
+						fn: {
+							before: function(){
+								$("#frmGenerales").find("[type=submit]").prop("disabled", true);
+								jsShowWindowLoad("Actualizando información en el servidor");
+							},
+							after: function(datos){
+								$("#frmGenerales").find("[type=submit]").prop("disabled", false);
+								jsRemoveWindowLoad();
+								if (datos.band){
+									alertify.success("Se ha actualizado el cambio de estado");
+									panelOrdenes();
+								}else{
+									alertify.error("Upps... Ocurrió un error al registrar la orden");
+								}
+							}
+						}
+					});
+	   			}
+	   		});
+
+		});
 		
 		$("#frmGenerales").submit(function(){
 			var obj = new TOrden;
@@ -105,9 +143,15 @@ function panelOrdenes(){
 		    		plantilla.find("[accion=modificar]").attr("datos", mercancia.json).click(function(){
 		    			$.each(mercancia, function(key, valor){
 		    				$("#frmMercancia").find("[campo="+ key +"]").val(valor);
-		    				
-		    				$("#winAddMercancia").modal();
 		    			});
+		    			
+		    			var text = $("select[campo=idOrigen] option[value=" + mercancia.idOrigen + "]").text();
+	    				$('.bootstrap-select .filter-option').text(text);
+	    				$('select[name=idOrigen]').val(mercancias.idOrigen);
+		    				
+		    			$("#winAddMercancia").modal();
+		    			
+		    			showSetTipoOrden();
 		    		});
 		    		
 		    		plantilla.find("[accion=eliminar]").attr("identificador", mercancia.idMercancia).click(function(){
@@ -128,8 +172,9 @@ function panelOrdenes(){
 					    				}
 				    				}
 				    			});
-				    		} else { alertify.error("Has pulsado '" + alertify.labels.cancel + "'");
-					    	}
+				    		} else {
+				    			alertify.error("Has pulsado '" + alertify.labels.cancel + "'");
+				    		}
 					    });
 		    		});
 		    		
@@ -143,12 +188,25 @@ function panelOrdenes(){
 		    }, "json");
 	    }
 	    
+	    $('.selectpicker').selectpicker();
+	    $("#btnAgregarMercancia").click(function(){
+	    	showSetTipoOrden();
+	    });
+	    
+	    function showSetTipoOrden(){
+		    if($("#idTipo").val() == 1)
+	    		$("#frmMercancia").find("#dvOrigen").show();
+	    	else{
+		    	$("#frmMercancia").find("#dvOrigen").hide();
+		    	var text = $("select[campo=idOrigen] option[value=146]").text();
+				$('.bootstrap-select .filter-option').text(text);
+				$('select[name=idOrigen]').val(146);
+		    }
+	    }
 	    
 	    $("#frmMercancia").validate({
 			debug: true,
 			rules: {
-				//txtCodigo: "required",
-				txtFraccion: "required",
 				txtDescripcion: "required",
 				txtMarca: "required",
 				txtModelo: "required",
@@ -158,10 +216,6 @@ function panelOrdenes(){
 					number: true
 				},
 				txtPesoNeto: {
-					required: true,
-					number: true
-				},
-				txtPesoBruto: {
 					required: true,
 					number: true
 				},
@@ -176,20 +230,17 @@ function panelOrdenes(){
 				obj.addMercancia({
 					"id": $("#idMercancia").val(),
 					"orden": $("#id").val(),
-					"fraccion": $("#txtFraccion").val(), 
 					"descripcion": $("#txtDescripcion").val(), 
 					"marca": $("#txtMarca").val(), 
 					"modelo": $("#txtModelo").val(),
 					"serie": $("#txtSerie").val(),
 					"cantidad": $("#txtCantidad").val(),
 					"pesoneto": $("#txtPesoNeto").val(),
-					"pesobruto": $("#txtPesoBruto").val(),
 					"embalaje": $("#txtEmbalaje").val(),
 					"mctm": $("#txtMCTM").val(),
 					"ec": $("#txtEC").val(),
 					"observaciones": $("#txtObservaciones").val(),
 					"origen": $("#selOrigen").val(),
-					"destino": $("#selDestino").val(),
 					fn: {
 						before: function(){
 							jsShowWindowLoad("Se está agregando la mercancía");

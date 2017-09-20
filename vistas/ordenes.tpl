@@ -9,6 +9,9 @@
 		<li>
 			<a data-toggle="tab" href="#tabMercancia">Mercancia</a>
 		</li>
+		<li>
+			<a data-toggle="tab" href="#tabAcciones">Acciones</a>
+		</li>
 	</ul>
 	
 	<div class="tab-content">
@@ -95,6 +98,7 @@
 						<div class="col-xs-12">
 							<button type="submit" class="btn btn-success btn-block">Guardar</button>
 							<input type="hidden" id="id" name="id" campo="idOrden" />
+							<input id="idTipo" name="idTipo" type="hidden" campo="idTipo">
 						</div>
 					</div>
 				</form>
@@ -114,6 +118,14 @@
 			<div class="lista">
 			</div>
 		</div>
+		<div class="tab-pane" id="tabAcciones" role="tabpanel">
+			<div class="container">
+				<a href="" class="btn btn-primary btn-block" id="btnDescargarFactura" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Factura</a>
+				<br />
+				<br />
+				<button id="setRevisada" name="setRevisada" class="btn btn-danger btn-block"> Establecer como Revisada</button>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -129,28 +141,15 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="txtFraccion" class="control-label col-xs-4">Fracción</label>
-						<div class="col-xs-8">
-							<input class="form-control input-xs" id="txtFraccion" name="txtFraccion" campo="fraccion">
-						</div>
-					</div>
-					<div class="form-group">
 						<label for="txtDescripcion" class="control-label col-xs-4">Descripción</label>
 						<div class="col-xs-8">
 							<input class="form-control input-xs" id="txtDescripcion" name="txtDescripcion" campo="descripcion">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="dvOrigen">
 						<label for="selOrigen" class="control-label col-xs-4">Origen</label>
 						<div class="col-xs-8">
-							<select id="selOrigen" name="selOrigen" class="form-control" campo="idOrigen">
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="selDestino" class="control-label col-xs-4">Destino</label>
-						<div class="col-xs-8">
-							<select id="selDestino" name="selDestino" class="form-control" campo="idDestino">
+							<select id="selOrigen" name="selOrigen" class="form-control selectpicker" campo="idOrigen" style="width: 100%" data-live-search="true">
 							</select>
 						</div>
 					</div>
@@ -185,27 +184,29 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtPesoBruto" class="control-label col-xs-4">Peso bruto</label>
-						<div class="col-xs-8">
-							<input class="form-control input-xs" id="txtPesoBruto" name="txtPesoBruto" value="1.0" campo="pesobruto">
-						</div>
-					</div>
-					<div class="form-group">
 						<label for="txtEmbalaje" class="control-label col-xs-4">Embalaje</label>
 						<div class="col-xs-8">
 							<input class="form-control input-xs" id="txtEmbalaje" name="txtEmbalaje" campo="embalaje">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtMCTM" class="control-label col-xs-4">M. C. T. M.</label>
-						<div class="col-xs-4">
-							<input class="form-control input-xs" id="txtMCTM" name="txtMCTM" campo="mctm">
+						<label for="txtMCTM" class="control-label col-xs-4">Marcado correcto (TM)</label>
+						<div class="col-xs-8">
+							<select class="form-control" id="txtMCTM" name="txtMCTM" campo="mctm">
+								<option value="NA">No aplica</option>
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtEC" class="control-label col-xs-4">E. C.</label>
-						<div class="col-xs-4">
-							<input class="form-control input-xs" id="txtEC" name="txtEC" campo="ec">
+						<label for="txtEC" class="control-label col-xs-4">Etiquetado correcto</label>
+						<div class="col-xs-8">
+							<select class="form-control" id="txtEC" name="txtEC" campo="ec">
+								<option value="NA">No aplica</option>
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">

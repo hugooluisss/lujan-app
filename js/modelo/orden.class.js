@@ -37,20 +37,17 @@ TOrden = function(){
 		$.post(server + 'cmercancias', {
 				"id": datos.id,
 				"orden": datos.orden,
-				"fraccion": datos.fraccion,
 				"descripcion": datos.descripcion,
 				"marca": datos.marca,
 				"modelo": datos.modelo,
 				"serie": datos.serie,
 				"cantidad": datos.cantidad,
 				"pesoneto": datos.pesoneto,
-				"pesobruto": datos.pesobruto,
 				"embalaje": datos.embalaje,
 				"mctm": datos.mctm,
 				"ec": datos.ec,
 				"observaciones": datos.observaciones,
 				"origen": datos.origen,
-				"destino": datos.destino,
 				"action": "add",
 				"movil": 1
 			}, function(data){
