@@ -33,6 +33,16 @@ form label.validateError {
   color: red;
   font-size: 12px;
 }
+#login {
+  background: url("../img/bgLogin.jpg");
+  background-size: cover;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  height: 100% !important;
+  min-height: 100%;
+  float: left;
+  width: 100%;
+}
 #login .inicio {
   text-align: center;
   width: 99%;
@@ -42,33 +52,37 @@ form label.validateError {
 }
 #home {
   overflow-y: hidden;
+  background: #ececec;
 }
 #home #menu {
-  background: #393d40;
+  background: url("../img/bgLogin.jpg");
+  background-size: cover;
+  background-position-x: center;
+  background-repeat: no-repeat;
 }
 #home #menu img {
   width: 150px;
   margin-bottom: 10px;
 }
-#home #menu .navbar {
-  background: #393d40;
+#home #menu .navbar-header {
+  background: none;
 }
-#home #menu .navbar a {
+#home #menu .navbar-header a {
   color: white;
   position: absolute;
   right: 3rem;
   margin-top: 3px;
 }
-#home #menu .navbar .navbar-toggler {
+#home #menu .navbar-header .navbar-toggle {
   color: white;
 }
-#home #menu .navbar .navbar-brand {
+#home #menu .navbar-header .navbar-brand {
   color: white;
   font-size: 16px;
 }
-#home #menu .col-4 {
-  padding-left: 2px;
-  padding-right: 2px;
+#home #menu .row {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 #home #menu a[role=button] {
   background: white;
@@ -77,6 +91,7 @@ form label.validateError {
   border-radius: inherit;
   color: #393d40;
   width: 100%;
+  margin-top: 5px;
 }
 #home #menu a[role=button]:last-child {
   border: none;
@@ -93,45 +108,26 @@ form label.validateError {
 #home #modulo {
   margin-top: 10px;
   overflow-y: scroll;
+  font-size: 12px;
 }
 #home #modulo .container {
   background: rgba(255, 255, 255, 0.8);
   padding-top: 10px;
   padding-bottom: 10px;
 }
-#home #modulo .page-header {
-  margin-top: 5px;
-  border-bottom-color: #295179;
+#home #modulo #tabMercancia {
+  min-height: 80%;
 }
-#home #modulo .page-header h1 {
-  font-size: 16px;
-  color: #295179;
-  margin: 0px;
-}
-#home #modulo div.orden {
-  margin-bottom: 15px;
-  font-size: 13px;
-}
-#home #modulo div.orden .mapa {
-  height: 200px;
-}
-#home #modulo div.orden .presupuesto {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-#home #modulo div.orden .posiciones {
+#home #modulo #tabMercancia .btn-group {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
-#home #modulo div.listaOrden {
-  font-size: 12px;
+#home #modulo #tabMercancia .mercancia .media-object {
+  width: 70px;
+  height: 70px;
 }
-#home #modulo div.listaOrden .badge {
-  font-size: 12px;
-  background: #8ac247;
-  font-weight: normal;
-  border-radius: 30px 30px 30px 30px;
-  -moz-border-radius: 30px 30px 30px 30px;
-  -webkit-border-radius: 30px 30px 30px 30px;
+#home #modulo #winFotografias .img-responsive {
+  display: inline;
 }
 #home .footer {
   position: relative;
@@ -139,31 +135,24 @@ form label.validateError {
   height: 40px;
   clear: both;
 }
+.panel-default .panel-heading {
+  background: red;
+}
+html {
+  height: 100%;
+}
 #WindowLoad {
   position: fixed;
   top: 0px;
   left: 0px;
   z-index: 3200;
   opacity: 0.8;
-  background: #393d40;
+  background: black;
   color: white;
 }
 #WindowLoad img {
-  width: 50%;
-}
-.text-success {
-  color: #46baad !important;
-}
-.btn-primary {
-  background: #46baad;
-  border-color: inherit;
-}
-.btn-primary:hover {
-  background: #24988b;
-  border-color: #3d8f86;
-}
-.btn-primary.btn-sm {
-  font-size: 10px;
+  width: 70%;
+  margin-bottom: 10px;
 }
 #alertify .btn {
   margin-left: 2px;
@@ -192,6 +181,12 @@ nav.footer .btn-primary {
 #lstImg img {
   width: 200px;
   height: 200px;
+}
+.tab-pane {
+  background: white;
+}
+.bootstrap-select .open {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
