@@ -3,7 +3,6 @@
 		<img src="img/producto_sin_foto.jpg" class="media-object" style="width:60px">
 	</div>
 	<div class="media-body">
-		<h4 class="media-heading" campo="fraccion">John Doe</h4>
 		<p campo="descripcion">Lorem ipsum...</p>
 		<div class="row">
 			<div class="col-xs-12 text-right">

@@ -109,6 +109,7 @@ function panelOrdenes(){
 				claveContenedor: $("#txtClaveContenedor").val(),
 				placas: $("#txtPlacas").val(),
 				numeroCandado: $("#txtNumeroCandado").val(),
+				pesoBruto: $("#txtPesoBruto").val(),
 				fn: {
 					before: function(){
 						$("#frmGenerales").find("[type=submit]").prop("disabled", true);

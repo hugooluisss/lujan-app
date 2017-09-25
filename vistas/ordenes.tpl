@@ -93,7 +93,12 @@
 							<input class="form-control form-control-sm" id="txtNumeroCandado" name="txtNumeroCandado" campo="numerocandado">
 						</div>
 					</div>
-					
+					<div class="form-group row">
+						<label for="txtPesoBruto" class="col-xs-12 label-control">Peso bruto</label>
+						<div class="col-xs-12">
+							<input class="form-control form-control-sm" id="txtPesoBruto" name="txtPesoBruto" campo="pesobruto">
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-xs-12">
 							<button type="submit" class="btn btn-success btn-block">Guardar</button>

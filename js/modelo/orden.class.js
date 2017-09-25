@@ -21,6 +21,7 @@ TOrden = function(){
 				"claveContenedor": datos.claveContenedor,
 				"placas": datos.placas,
 				"numeroCandado": datos.numeroCandado,
+				"pesoBruto": datos.pesoBruto,
 				"movil": 1,
 				"action": "add"
 			}, function(data){
